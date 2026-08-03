@@ -1,90 +1,169 @@
-# TechTim's Astro Bento Portfolio
+# Baki Gül — Claude Notebook AI Danışmanlık Sitesi
 
-This template helps you build a portfolio using Astro, Typescript, React, Tailwind CSS, and Shadcn UI.
+Claude'un sıcak krem ve turuncu renklerinden ilham alan, not defteri detaylarına sahip tek sayfalık AI danışmanlık sitesi.
 
-- [Live Demo](https://techtim42.bai.uno)
-- [GitHub Repo](https://github.com/tim-hub/techtim-astro-bento-portfolio)
+İlk sürüm gerçek bir LLM çağrısı yapmaz. Ziyaretçi üç hazır AI probleminden birini seçtiğinde önerilen çalışma, inceleme alanı ve ilk adım ekranda değişir.
 
-## Technologies Used
+## Tasarım yapısı
 
-This project utilizes the following technologies:
+- Sıcak krem, kahve ve Claude turuncusu renk paleti
+- Defter çizgileri, bant, ataş ve el yazısı notları
+- İki sayfalık hero alanı
+- Hazır seçeneklerle çalışan mini AI check-up
+- Üç danışmanlık çalışma alanı
+- Kullanım senaryoları ve danışman profili
+- Gerçek Baki ile AI yazılarını gösteren blog bölümü
+- Mobil ve masaüstü uyumlu düzen
 
-- **Astro**: A modern framework for building fast and efficient websites.
-- **Tailwind CSS**: A utility-first CSS framework for rapid and responsive design.
-- **Shadcn UI**: A collection of accessible and easy-to-use UI components.
-- **React**: For interactive components and advanced functionality.
-- **TypeScript**: For static type checking and improved developer experience.
+## Hızlı önizleme
 
-## Requirements
+Bu klasörde terminal açın:
 
-Before starting, make sure you have the following requirements installed:
+```bash
+npm run serve
+```
 
-- Node.js (version 18 or higher)
-- pnpm (version 8 or higher)
+Ardından tarayıcıdan `http://localhost:4173` adresini açın.
 
-## Installation
+Python komutunu doğrudan da kullanabilirsiniz:
 
-To install and run the project locally, follow these steps:
+```bash
+python3 -m http.server 4173
+```
 
-1. Clone this repository:
+## Metinleri değiştirme
 
-   ```bash
-   git clone https://github.com/tim-hub/techtim-astro-bento-portfolio
-   ```
+Ana içerik, blog yazıları ve bağlantılar şu dosyadadır:
 
-2. Navigate to the project directory:
+```text
+assets/site-data.js
+```
 
-   ```bash
-   cd techtim-astro-bento-portfolio
-   ```
+Buradan şunları değiştirebilirsiniz:
 
-3. Install the dependencies:
+- Ana başlık ve açıklama
+- Uzmanlık etiketleri
+- Üç çalışma biçimi
+- Kullanım alanları
+- Profil metni
+- LinkedIn, bülten ve site bağlantıları
+- Hazır AI problem seçenekleri ve önerileri
+- Blog bölümü başlığı ve açıklaması
+- Blog yazılarının kategorisi, başlığı, özeti, tarihi ve bağlantısı
 
-   ```bash
-   pnpm install
-   ```
+### Yeni blog yazısı ekleme
 
-4. Start the development server:
+`siteData.blog.posts` dizisine şu yapıda bir kayıt ekleyin:
 
-   ```bash
-   pnpm run dev
-   ```
+```js
+{
+  category: 'Kategori',
+  title: 'Yazı başlığı',
+  excerpt: 'Kısa açıklama',
+  label: 'Ağu 3, 2026',
+  url: 'https://bakigul.substack.com/p/yazi-adresi',
+  featured: false
+}
+```
 
-5. Open your browser and visit `http://localhost:4312` to see your portfolio in action.
-6. Config your site
-   1. Edit `src/content/profileData.ts` to add your profile data
-   2. Edit `astro.config.mjs` to change the site information
+Yalnızca bir yazıda `featured: true` kullanılması önerilir. Bu yazı blog bölümünde büyük kart olarak görünür.
 
+Blog yazıları şu anda manuel olarak yönetilir; Substack ile otomatik senkronizasyon yapılmaz.
 
-## Important Considerations
+## Tasarımı değiştirme
 
-- **Accessibility**: Ensure your portfolio is accessible to all users, including those with disabilities.
-- **SEO**: Optimize your portfolio for search engines by adding meta tags and relevant content.
-- **Performance**: Use modern web development practices to ensure optimal performance, such as lazy loading images and minimizing CSS/JS.
-- **Responsive Design**: Make sure your portfolio looks good on devices of all sizes, from mobile to desktop screens.
+Renkler, defter dokuları, kart düzeni ve responsive kurallar:
 
-## Contributions
+```text
+assets/styles.css
+```
 
-Contributions are welcome! If you have ideas or improvements, please open an issue or submit a pull request.
+Ana sayfa yapısı ve JavaScript kapalıyken gösterilen yedek içerik:
 
-## License
+```text
+index.html
+```
 
-- This source codes are licensed under the [MIT License](LICENSE).
-- The content (`src/content/`) of the portfolio is licensed under the [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
-- The images (`public/`) used in the project are for template demonstration purposes only and should not be reused without permission.
+Etkileşim ve içerik bağlama kodu:
 
-## Inspiration
+```text
+assets/app.js
+```
 
-This project was inspired by several outstanding portfolios. Here are some that served as references:
+## Yayınlama
 
-- [Bento Like Portfolio](https://github.com/Ladvace/astro-bento-portfolio)
-- [Minimal and bento Portfolio ](https://github.com/bue221/astro-portfolio)
+Site statik olduğu için klasörü doğrudan şu platformlardan birine yükleyebilirsiniz:
 
-### Differences / Improvements
+- Netlify Drop
+- Vercel
+- GitHub Pages
+- Herhangi bir klasik hosting veya CDN
 
-- Centralised data management inside one folder
-  - Use Astro recommended [Content Collection](https://docs.astro.build/en/guides/content-collections/) to manage data
-  - `src/content` folder for blog posts, project data and profile data
-  - `src/content/profileData.ts` for general profile data
-- Tags system
-- Simplified Dark/Light mode toggle
+Build komutuna gerek yoktur. Yayın kökü `index.html` dosyasının bulunduğu klasördür.
+
+## Gerçek AI özelliği ekleneceği zaman
+
+İkinci sürümde `assets/app.js` içindeki hazır öneri akışı bir API endpoint'ine bağlanabilir. Kullanıcının yazdığı problem backend'e gönderilir; modelden yapılandırılmış çözüm, ihtiyaçlar ve ilk adım çıktısı alınır.
+
+## Test
+
+```bash
+npm test
+```
+
+## İletişim formu ve Cloudflare Worker
+
+AI check-up bölümündeki form, geliştirme ortamında `http://localhost:8787/contact`,
+üretimde `https://api.bakigul.com/contact` adresine gönderilir.
+
+Yerel Worker'ı başlatmak için ayrı bir terminalde:
+
+```bash
+npm run worker:dev
+```
+
+Worker şunları uygular:
+
+- Yalnız izin verilen site origin'lerinden form kabulü
+- Alan doğrulama ve 16 KB istek sınırı
+- Honeypot spam koruması
+- Cloudflare rate-limit bağlaması
+- Cloudflare Email Service ile `info@bakigul.com` adresine teslimat
+
+Cloudflare alan adı ve yayınlama adımları `worker/README.md` dosyasındadır.
+
+## GitHub fork'una gönderme
+
+Bu klasörü açtıktan sonra terminalde şu komutu çalıştırın:
+
+```bash
+./publish-to-github.sh
+```
+
+Script otomatik olarak:
+
+1. `gulbaki/bakigul` reposunu klonlar.
+2. `template` branch'inden `agent/claude-notebook-site` branch'ini açar.
+3. Orijinal `LICENSE` dosyasını ve fork geçmişini korur.
+4. Claude Notebook site dosyalarını tek commit halinde yükler.
+5. Push sonrasında açılacak Pull Request bağlantısını gösterir.
+
+GitHub kimlik doğrulaması istenirse hesabınızla giriş yapın. HTTPS kimlik doğrulaması çalışmıyorsa repo adresini SSH olarak verebilirsiniz:
+
+```bash
+REPO_URL=git@github.com:gulbaki/bakigul.git ./publish-to-github.sh
+```
+
+Branch daha önce oluşturulduysa farklı bir branch adı kullanın:
+
+```bash
+TARGET_BRANCH=agent/claude-notebook-site-v2 ./publish-to-github.sh
+```
+
+## GitHub Pages
+
+Projede `.github/workflows/pages.yml` dosyası hazırdır. Pull Request `template` branch'ine birleştirildikten sonra:
+
+1. Repository **Settings → Pages** bölümüne gidin.
+2. **Source** olarak **GitHub Actions** seçin.
+3. `Deploy static site to GitHub Pages` workflow'unu çalıştırın veya yeni bir commit gönderin.

@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Baki Gül ile AI stratejisi, RAG, AI agent sistemleri ve kurumsal yapay zekâ eğitimleri."
+    />
+    <meta name="theme-color" content="#f7f1e7" />
+    <title>Baki Gül — AI Danışmanlığı</title>
+    <link rel="stylesheet" href="./assets/styles.css" />
+    <script type="module" src="./assets/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">İçeriğe geç</a>
+
+    <div class="paper-noise" aria-hidden="true"></div>
+    <div class="page-shell">
+      <header class="site-header" aria-label="Ana navigasyon">
+        <a class="brand" href="./" aria-label="Baki ile AI ana sayfa">
+          <img
+            src="./assets/baki-ile-ai-logo.png"
+            alt="Baki ile AI"
+            width="1448"
+            height="1086"
+          />
+        </a>
+
+        <p class="header-note">AI danışmanlığı · İstanbul</p>
+
+        <nav class="main-nav" aria-label="Sayfa bölümleri">
+          <a href="#services">Çalışma alanları</a>
+          <a href="#checkup">AI check-up</a>
+          <a href="#blog">Yazılar</a>
+          <a href="#contact">İletişim</a>
+        </nav>
+
+        <span class="availability"><span aria-hidden="true"></span> Yeni projelere açık</span>
+      </header>
+
+      <main id="main">
+        <section class="notebook-spread hero-section" aria-labelledby="hero-title">
+          <div class="notebook-page hero-page">
+            <div class="page-label"><span>01</span> Danışmanlık notları</div>
+            <p class="eyebrow">Teknoloji değil, doğru problem.</p>
+            <h1 id="hero-title" data-bind-html="hero-title">
+              Şirketinizde yapay zekânın gerçekten
+              <em>nerede işe yarayacağını</em> buluyorum.
+            </h1>
+            <p class="hero-description" data-bind="hero-description">
+              AI stratejisi, RAG, agent sistemleri ve ekip eğitimleri. Önce doğru problemi seçer,
+              sonra çalışan bir ilk adım çıkarırız.
+            </p>
+
+            <div class="hero-actions">
+              <a class="primary-button" href="#contact">
+                <span data-bind="hero-cta">Probleminizi konuşalım</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+              <p class="handwritten-caption">30 dakikalık kısa bir keşif görüşmesi</p>
+            </div>
+
+            <ul class="tag-list" aria-label="Uzmanlık alanları" data-bind-list="hero-tags">
+              <li>AI Stratejisi</li>
+              <li>RAG</li>
+              <li>AI Agent</li>
+              <li>Otomasyon</li>
+              <li>Ekip Eğitimi</li>
+            </ul>
+          </div>
+
+          <aside class="notebook-page note-page" aria-label="Çalışma yaklaşımı">
+            <span class="tape tape-top" aria-hidden="true"></span>
+            <div class="working-note">
+              <p class="handwritten-title">working note / 04</p>
+              <h2>Bir AI projesine nasıl başlıyorum?</h2>
+              <ol class="principle-list">
+                <li class="principle-item"><span>1</span><strong>Önce problem.</strong><small>Model seçmeden önce iş akışını anlamak.</small></li>
+                <li class="principle-item"><span>2</span><strong>Sonra veri.</strong><small>Kalite, erişim ve yetki sınırlarını görmek.</small></li>
+                <li class="principle-item"><span>3</span><strong>Küçük prototip.</strong><small>Uzun proje yerine ölçülebilir ilk deneme.</small></li>
+                <li class="principle-item"><span>4</span><strong>Ölç, düzelt, büyüt.</strong><small>Sonuç varsa üretime taşımak.</small></li>
+              </ol>
+              <p class="margin-note">“Her şirkete agent gerekmiyor.”</p>
+            </div>
+          </aside>
+        </section>
+
+        <section id="checkup" class="worksheet-section ruled-section" aria-labelledby="checkup-title">
+          <header class="section-intro">
+            <div>
+              <p class="section-kicker">Mini çalışma sayfası · 02</p>
+              <h2 id="checkup-title">Şirketinizin AI derdi ne?</h2>
+            </div>
+            <p>Bir seçeneğe dokunun; ilk danışmanlık yönünü hemen görün.</p>
+          </header>
+
+          <div class="worksheet-grid">
+            <div class="problem-options" role="group" aria-label="AI probleminizi seçin">
+              <button class="problem-button" type="button" data-problem-button="baslangic" aria-pressed="true">
+                <span class="checkbox-mark" aria-hidden="true"></span>
+                <span class="problem-letter">A</span>
+                <span>Nereden başlayacağımızı bilmiyoruz.</span>
+              </button>
+              <button class="problem-button" type="button" data-problem-button="rag-agent" aria-pressed="false">
+                <span class="checkbox-mark" aria-hidden="true"></span>
+                <span class="problem-letter">B</span>
+                <span>RAG veya agent sistemimiz istediğimiz gibi çalışmıyor.</span>
+              </button>
+              <button class="problem-button" type="button" data-problem-button="ekip" aria-pressed="false">
+                <span class="checkbox-mark" aria-hidden="true"></span>
+                <span class="problem-letter">C</span>
+                <span>Ekibimiz AI araçlarından yeterince verim alamıyor.</span>
+              </button>
+            </div>
+
+            <article class="consultant-note" data-recommendation aria-live="polite">
+              <span class="paperclip" aria-hidden="true"></span>
+              <p class="recommendation-kicker">Önerilen çalışma</p>
+              <h3>AI Yol Haritası</h3>
+              <div class="recommendation-detail">
+                <span>Neye bakarız?</span>
+                <p>Süreçleri, veri hazırlığını ve iş etkisini birlikte inceler; fikirleri uygulanabilirlik ve değer açısından sıralarız.</p>
+              </div>
+              <div class="recommendation-detail">
+                <span>İlk adım</span>
+                <p>60 dakikalık bir keşif görüşmesiyle üç öncelikli kullanım alanı ve ilk deneme kapsamı çıkarılır.</p>
+              </div>
+            </article>
+          </div>
+
+          <div class="checkup-contact" aria-labelledby="checkup-contact-title">
+            <div class="checkup-contact-intro">
+              <p class="section-kicker">İletişime geç · seçimin hazır</p>
+              <h3 id="checkup-contact-title">Bu notu birlikte işe dönüştürelim.</h3>
+              <p>
+                Kısa formu bırakın; seçtiğiniz problem ve önerilen çalışma notuyla birlikte
+                doğrudan bana ulaşsın.
+              </p>
+              <div class="selected-problem-slip">
+                <span>Seçilen konu</span>
+                <strong data-selected-problem-label>Nereden başlayacağımızı bilmiyoruz.</strong>
+              </div>
+            </div>
+
+            <form
+              class="contact-form-card"
+              action="https://api.bakigul.com/contact"
+              method="post"
+              data-contact-form
+              data-endpoint="https://api.bakigul.com/contact"
+            >
+              <div class="form-grid">
+                <label class="form-field">
+                  <span>Ad soyad <small>gerekli</small></span>
+                  <input type="text" name="fullName" autocomplete="name" minlength="2" maxlength="100" required />
+                </label>
+
+                <label class="form-field">
+                  <span>İş e-postası <small>gerekli</small></span>
+                  <input type="email" name="email" autocomplete="email" maxlength="254" required />
+                </label>
+
+                <label class="form-field form-field--wide">
+                  <span>Şirket <small>isteğe bağlı</small></span>
+                  <input type="text" name="company" autocomplete="organization" maxlength="120" />
+                </label>
+
+                <label class="form-field form-field--wide">
+                  <span>Kısaca neyi çözmek istiyorsunuz? <small>gerekli</small></span>
+                  <textarea name="message" minlength="20" maxlength="2000" rows="5" required></textarea>
+                </label>
+              </div>
+
+              <input
+                type="hidden"
+                name="problem"
+                value="Nereden başlayacağımızı bilmiyoruz. — AI Yol Haritası"
+                data-selected-problem-input
+              />
+              <input type="hidden" name="source" value="AI check-up" />
+
+              <div class="form-honeypot" aria-hidden="true" inert>
+                <label>
+                  Web sitesi
+                  <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+                </label>
+              </div>
+
+              <div class="form-submit-row">
+                <p>Bilgileriniz yalnızca bu talebe yanıt vermek amacıyla kullanılır.</p>
+                <button class="contact-form-submit" type="submit" data-contact-submit>
+                  <span data-submit-label>Notu gönder</span>
+                  <span aria-hidden="true">↗</span>
+                </button>
+              </div>
+              <p class="form-status" role="status" aria-live="polite" data-form-status></p>
+            </form>
+          </div>
+
+          <noscript>
+            <div class="noscript-fallback">
+              <p><strong>AI Yol Haritası:</strong> Süreç ve veri hazırlığı analiziyle öncelikli kullanım alanları belirlenir.</p>
+              <p><strong>RAG & Agent Review:</strong> Retrieval, agent akışı, güvenlik, maliyet ve ölçüm incelenir.</p>
+              <p><strong>Kurumsal AI Workshop:</strong> Ekibin gerçek iş akışları üzerinden uygulamalı çalışma yapılır.</p>
+            </div>
+          </noscript>
+        </section>
+
+        <section id="services" class="services-section" aria-labelledby="services-title">
+          <header class="section-intro">
+            <div>
+              <p class="section-kicker">Çalışma alanları · 03</p>
+              <h2 id="services-title">Üç net çalışma biçimi.</h2>
+            </div>
+            <p>İhtiyacınıza göre stratejiden mimari incelemeye, ekip eğitiminden prototipe kadar ilerleriz.</p>
+          </header>
+
+          <ol class="service-tabs" data-bind-list="services">
+            <li>
+              <span class="service-number">01</span>
+              <div><h3>AI Yol Haritası</h3><p>Fikirleri iş etkisi, veri hazırlığı, maliyet ve risk açısından önceliklendirir.</p></div>
+            </li>
+            <li>
+              <span class="service-number">02</span>
+              <div><h3>RAG & Agent Review</h3><p>Doğruluk, güvenlik, maliyet ve ölçeklenebilirlik problemlerini görünür kılar.</p></div>
+            </li>
+            <li>
+              <span class="service-number">03</span>
+              <div><h3>Kurumsal AI Workshop</h3><p>Ekibin günlük işleri üzerinden uygulanabilir AI çalışma biçimleri oluşturur.</p></div>
+            </li>
+          </ol>
+          <p class="services-scribble">strateji → prototip → ölçüm</p>
+        </section>
+
+        <div class="field-notes-grid">
+          <section id="use-cases" class="field-notes" aria-labelledby="use-cases-title">
+            <p class="section-kicker">Saha notları · 04</p>
+            <h2 id="use-cases-title">Gösterişli demo değil, çalışan iş akışı.</h2>
+            <ul class="use-case-list" data-bind-list="use-cases">
+              <li><span>01</span> Kurumsal doküman asistanı</li>
+              <li><span>02</span> Müşteri e-postası agent'ı</li>
+              <li><span>03</span> Hasar ve operasyon dosyası copilot'u</li>
+              <li><span>04</span> Teklif ve rapor otomasyonu</li>
+            </ul>
+            <span class="circle-note" aria-hidden="true">use case ≠ demo</span>
+          </section>
+
+          <section id="about" class="about-page" aria-labelledby="about-title">
+            <span class="tape tape-side" aria-hidden="true"></span>
+            <p class="section-kicker">Danışman hakkında · 05</p>
+            <h2 id="about-title" data-bind="credibility-title">Teknik tarafı bilen, işi de anlayan bir danışmanlık.</h2>
+            <p data-bind="credibility-description">
+              Yazılım mühendisliği, LLM uygulamaları ve AI çözüm mimarisi geçmişini; şirketlerin gerçek süreçlerine uygulanabilir çözümlere dönüştürüyorum.
+            </p>
+            <ul class="signal-list" aria-label="Deneyim alanları" data-bind-list="credibility-signals">
+              <li>Senior Software Engineer geçmişi</li>
+              <li>Generative AI ve LLM uygulamaları</li>
+              <li>Baki ile AI içerik topluluğu</li>
+            </ul>
+            <div class="signature" aria-hidden="true">Baki</div>
+          </section>
+        </div>
+
+        <section id="blog" class="blog-section ruled-section" aria-labelledby="blog-title">
+          <header class="section-intro blog-heading">
+            <div>
+              <p class="section-kicker">Okuma defteri · 06</p>
+              <h2 id="blog-title" data-bind="blog-title">Baki ile AI</h2>
+            </div>
+            <div>
+              <p data-bind="blog-description">AI agent’ları, Claude/ChatGPT workflow’larını ve geliştirici verimliliğini herkesin anlayacağı dille anlatıyorum.</p>
+              <a class="text-arrow-link" href="https://bakigul.substack.com/" data-link="newsletter" target="_blank" rel="noreferrer">Bütün yazıları gör <span aria-hidden="true">↗</span></a>
+            </div>
+          </header>
+
+          <div class="blog-grid" data-bind-list="blog-posts">
+            <article class="article-card article-card--featured">
+              <div class="article-meta"><span>ChatGPT Work</span><span>Tem 15, 2026</span></div>
+              <h3>CLAUDE SİLMELİSİN.</h3>
+              <p>ChatGPT Work’ü bir cevap ekranı değil, dosyalar ve çıktılarla işi ilerleten bir çalışma alanı olarak kullanma rehberi.</p>
+              <a href="https://bakigul.substack.com/p/claude-silmelisin" target="_blank" rel="noreferrer">Yazıyı oku <span aria-hidden="true">↗</span></a>
+            </article>
+            <article class="article-card">
+              <div class="article-meta"><span>Agent Workflow</span><span>Tem 3, 2026</span></div>
+              <h3>Fable 5’i Yanlış Kullanıyorsun: Boşa Token Yakan Workflow Yerine Bunu Kur</h3>
+              <p>Claude Code, Codex ve farklı model rollerini tek bir orkestrasyon akışında daha verimli kullanmanın pratik yolu.</p>
+              <a href="https://bakigul.substack.com/p/fable-5i-yanls-kullanyorsun-bosa" target="_blank" rel="noreferrer">Yazıyı oku <span aria-hidden="true">↗</span></a>
+            </article>
+            <article class="article-card">
+              <div class="article-meta"><span>Claude Cowork</span><span>Haz 28, 2026</span></div>
+              <h3>Claude Cowork’u Kurmadan Yapay Zeka Kullanıyorum Deme</h3>
+              <p>Claude ile sohbet etmekten, dosyalar ve klasörlerle işi baştan sona yürütmeye geçmek için kurulum ve çalışma düzeni.</p>
+              <a href="https://bakigul.substack.com/p/claude-coworku-kurmadan-yapay-zeka" target="_blank" rel="noreferrer">Yazıyı oku <span aria-hidden="true">↗</span></a>
+            </article>
+            <article class="article-card">
+              <div class="article-meta"><span>Claude 101</span><span>Haz 27, 2026</span></div>
+              <h3>Claude 101: Hiç Kullanmadıysan Buradan Başla</h3>
+              <p>Claude’u ilk kez kullanacaklar için dosyalar, Projects, Artifacts, Skills, Connectors, Research, Cowork ve Code rehberi.</p>
+              <a href="https://bakigul.substack.com/p/claude-101-hic-kullanmadysan-buradan" target="_blank" rel="noreferrer">Yazıyı oku <span aria-hidden="true">↗</span></a>
+            </article>
+          </div>
+        </section>
+
+        <section id="contact" class="tear-off-contact" aria-labelledby="contact-title">
+          <div class="perforation" aria-hidden="true"></div>
+          <p class="section-kicker">Sonraki sayfa · 07</p>
+          <div class="contact-grid">
+            <div>
+              <h2 id="contact-title" data-bind="contact-title">Bir chatbot daha yapmadan önce doğru problemi seçelim.</h2>
+              <p class="handwritten-arrow">buradan başlayalım ↘</p>
+            </div>
+            <div class="contact-actions">
+              <p data-bind="contact-description">Mevcut durumunuzu ve en mantıklı ilk adımı kısa bir görüşmede konuşalım.</p>
+              <a class="contact-button" href="https://www.linkedin.com/in/baki-gul/" data-link="contact" target="_blank" rel="noreferrer">LinkedIn'den ulaşın <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+          <footer class="site-footer">
+            <span>© 2026 Baki Gül</span>
+            <nav aria-label="Sosyal bağlantılar">
+              <a href="https://bakigul.substack.com/" data-link="newsletter" target="_blank" rel="noreferrer">Bülten</a>
+              <a href="https://www.linkedin.com/in/baki-gul/" data-link="linkedin" target="_blank" rel="noreferrer">LinkedIn</a>
+              <a href="https://bakigul.com/" data-link="website" target="_blank" rel="noreferrer">bakigul.com</a>
+            </nav>
+          </footer>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
