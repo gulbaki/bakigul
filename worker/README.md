@@ -1,17 +1,24 @@
 # Cloudflare iletişim API'si
 
 Bu Worker, `POST /contact` isteklerini doğrular ve Cloudflare Email Service üzerinden
-`website@bakigul.com` adresinden `info@bakigul.com` adresine gönderir.
+`website@bakigul.com` adresinden `info@bakigul.com` yönlendirmesinin arkasındaki doğrulanmış
+posta kutusuna gönderir.
 
 ## Cloudflare hazırlığı
 
 1. Cloudflare Dashboard → **Compute → Email Service → Email Sending** bölümünü açın.
 2. `bakigul.com` alan adını onboard edin ve Cloudflare'ın oluşturduğu SPF, DKIM ve bounce kayıtlarını onaylayın.
-3. `info@bakigul.com` adresinin çalışan bir posta kutusu veya aktif bir Email Routing adresi olduğundan emin olun.
+3. `info@bakigul.com` adresini doğrulanmış gerçek posta kutusuna yönlendiren aktif bir Email Routing kuralı oluşturun.
 4. Cloudflare CLI oturumunu açın:
 
    ```bash
    npx wrangler@latest login
+   ```
+
+5. Worker'ın doğrulanmış hedef posta kutusunu bir Cloudflare secret olarak tanımlayın:
+
+   ```bash
+   npx wrangler@latest secret put CONTACT_DELIVERY_TO --config worker/wrangler.jsonc
    ```
 
 ## Yerel geliştirme
@@ -29,8 +36,10 @@ Site `http://localhost:4173`, API `http://localhost:8787/contact` adresinde çal
 npm run worker:deploy
 ```
 
-`worker/wrangler.jsonc` dosyası Worker'ı `api.bakigul.com` özel alan adına bağlar. Gönderim
-bağlaması yalnızca `website@bakigul.com` → `info@bakigul.com` yönüne izin verir.
+`worker/wrangler.jsonc` dosyası Worker'ı `api.bakigul.com` özel alan adına bağlar. Gönderici
+`website@bakigul.com` göndericisi ve doğrulanmış teslimat adresiyle sınırlandırılır. Cloudflare binding
+allowlist'i doğrulanmış adresi açıkça tanımlar; Worker'ın kullandığı hedef değer ayrıca
+`CONTACT_DELIVERY_TO` Cloudflare secret'ında tutulur.
 
 ## Güvenlik
 

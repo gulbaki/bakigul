@@ -158,7 +158,7 @@ async function sendContactEmail(env, data) {
 
   const content = emailContent(data);
   return env.EMAIL.send({
-    to: env.CONTACT_TO || DEFAULT_TO,
+    to: env.CONTACT_DELIVERY_TO || env.CONTACT_TO || DEFAULT_TO,
     from: {
       email: env.CONTACT_FROM || DEFAULT_FROM,
       name: 'Baki ile AI Web Sitesi'

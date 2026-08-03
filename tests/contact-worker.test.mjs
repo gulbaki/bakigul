@@ -119,6 +119,14 @@ test('sends a validated email with a safe reply-to address', async () => {
   assert.match(sent[0].html, /&lt;script&gt;/);
 });
 
+test('prefers the private delivery target over the public alias', async () => {
+  const { env, sent } = createEnv({ CONTACT_DELIVERY_TO: 'verified@example.com' });
+  const response = await handleRequest(postRequest(), env);
+
+  assert.equal(response.status, 202);
+  assert.equal(sent[0].to, 'verified@example.com');
+});
+
 test('silently accepts honeypot submissions without sending email', async () => {
   const { env, sent } = createEnv();
   const response = await handleRequest(postRequest({ ...validPayload, website: 'spam.example' }), env);
