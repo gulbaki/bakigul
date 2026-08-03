@@ -57,10 +57,11 @@ test('page contains a notebook blog section with fallback article content', () =
   assert.match(html, /Bütün yazıları gör/);
 });
 
-test('contact section exposes tear-off and handwritten annotation hooks', () => {
+test('contact section exposes the tear-off contact form', () => {
   assert.match(html, /class="tear-off-contact"/);
-  assert.match(html, /class="handwritten-arrow"/);
-  assert.match(html, /data-link="contact"/);
+  assert.match(html, /class="checkup-contact"/);
+  assert.match(html, /id="checkup-contact-title"/);
+  assert.match(html, /data-contact-form/);
 });
 
 test('page includes assets, metadata, and a no-script fallback', () => {
@@ -68,6 +69,8 @@ test('page includes assets, metadata, and a no-script fallback', () => {
   assert.match(html, /type="module" src="\.\/assets\/app\.js"/);
   assert.match(html, /<noscript>/);
   assert.match(html, /name="theme-color" content="#f7f1e7"/i);
+  assert.match(html, /G-7ERQF3DF3M/);
+  assert.match(html, /assets\/favicon\.svg/);
 });
 
 

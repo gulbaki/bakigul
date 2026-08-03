@@ -24,6 +24,9 @@ export function recommendationMarkup(preset) {
       <span>İlk adım</span>
       <p>${escapeHtml(preset.firstStep)}</p>
     </div>
+    <button class="recommendation-cta" type="button" data-checkup-contact-cta>
+      İletişime geç <span aria-hidden="true">↓</span>
+    </button>
   `;
 }
 
@@ -33,6 +36,10 @@ export function selectionState(ids, activeId) {
 
 export function problemContactValue(preset) {
   return `${preset.label} — ${preset.engagement}`;
+}
+
+export function problemContactMessage(preset) {
+  return `Seçtiğim konu: ${preset.label}\nÖnerilen çalışma: ${preset.engagement}\n\nBu konuda görüşmek istiyorum.`;
 }
 
 export function resolveContactEndpoint(configuredEndpoint, hostname) {
@@ -137,6 +144,7 @@ function setLink(binding, href) {
 
 function hydrateSiteCopy() {
   setText('brand', siteData.brand);
+  setText('eyebrow', siteData.eyebrow);
   setText('hero-description', siteData.hero.description);
   setText('hero-cta', siteData.hero.cta);
   setText('credibility-title', siteData.credibility.title);
@@ -240,8 +248,10 @@ function initializeProblemSelector() {
 
   if (buttons.length === 0 || !recommendation) return;
 
+  let activePreset = problemPresets[0];
+
   const selectProblem = (id) => {
-    const activePreset = findPreset(id);
+    activePreset = findPreset(id);
     recommendation.innerHTML = recommendationMarkup(activePreset);
     syncContactProblem(activePreset);
 
@@ -256,6 +266,24 @@ function initializeProblemSelector() {
   for (const button of buttons) {
     button.addEventListener('click', () => selectProblem(button.dataset.problemButton));
   }
+
+  recommendation.addEventListener('click', (event) => {
+    const target = event.target instanceof Element
+      ? event.target.closest('[data-checkup-contact-cta]')
+      : null;
+    if (!target) return;
+
+    const form = document.querySelector('[data-contact-form]');
+    const message = form?.querySelector('[name="message"]');
+    if (message) message.value = problemContactMessage(activePreset);
+
+    for (const name of ['fullName', 'email', 'company']) {
+      const field = form?.querySelector(`[name="${name}"]`);
+      if (field) field.value = '';
+    }
+
+    document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 
   const initiallyPressed = buttons.find((button) => button.getAttribute('aria-pressed') === 'true');
   selectProblem(initiallyPressed?.dataset.problemButton ?? problemPresets[0].id);

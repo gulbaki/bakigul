@@ -32,7 +32,7 @@ test('selectionState marks only one button pressed', () => {
 test('problemContactValue carries the selected problem into the form', () => {
   assert.equal(
     problemContactValue(findPreset('ekip')),
-    'Ekibimiz AI araçlarından yeterince verim alamıyor. — Kurumsal AI Workshop'
+    'Ekibimiz Yapay Zeka araçlarından yeterince verim alamıyor. — Kurumsal Yapay Zeka Workshop'
   );
 });
 

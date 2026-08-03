@@ -2,11 +2,11 @@ export const problemPresets = [
   {
     id: 'baslangic',
     label: 'Nereden başlayacağımızı bilmiyoruz.',
-    engagement: 'AI Yol Haritası',
+    engagement: 'Yapay Zeka Yol Haritası',
     examines:
       'Süreçleri, veri hazırlığını ve iş etkisini birlikte inceler; fikirleri uygulanabilirlik ve değer açısından sıralarız.',
     firstStep:
-      '60 dakikalık bir keşif görüşmesiyle üç öncelikli kullanım alanı ve ilk deneme kapsamı çıkarılır.'
+      '45 dakikalık bir keşif görüşmesiyle üç öncelikli kullanım alanı ve ilk deneme kapsamı çıkarılır.'
   },
   {
     id: 'rag-agent',
@@ -19,8 +19,8 @@ export const problemPresets = [
   },
   {
     id: 'ekip',
-    label: 'Ekibimiz AI araçlarından yeterince verim alamıyor.',
-    engagement: 'Kurumsal AI Workshop',
+    label: 'Ekibimiz Yapay Zeka araçlarından yeterince verim alamıyor.',
+    engagement: 'Kurumsal Yapay Zeka Workshop',
     examines:
       'Ekibin gerçek görevleri, kullandığı araçlar, güvenlik sınırları ve tekrar eden iş akışları analiz edilir.',
     firstStep:
@@ -30,20 +30,20 @@ export const problemPresets = [
 
 export const siteData = {
   brand: 'Baki Gül',
-  eyebrow: 'AI danışmanlığı · İstanbul',
+  eyebrow: 'Yapay Zeka danışmanlığı',
   hero: {
-    titleLead: 'Şirketinizde yapay zekânın gerçekten',
+    titleLead: 'Şirketinizde yapay zekanın gerçekten',
     titleEmphasis: 'nerede işe yarayacağını',
     titleTail: 'buluyorum.',
     description:
-      'AI stratejisi, RAG, agent sistemleri ve ekip eğitimleri. Önce doğru problemi seçer, sonra çalışan bir ilk adım çıkarırız.',
+      'Yapay zeka stratejisi, RAG, agent sistemleri ve ekip eğitimleri. Önce doğru problemi seçer, sonra çalışan bir ilk adım çıkarırız.',
     cta: 'Probleminizi konuşalım',
-    tags: ['AI Stratejisi', 'RAG', 'AI Agent', 'Otomasyon', 'Ekip Eğitimi']
+    tags: ['Yapay Zeka Stratejisi', 'RAG', 'AI Agent', 'Otomasyon', 'Ekip Eğitimi']
   },
   services: [
     {
       number: '01',
-      title: 'AI Yol Haritası',
+      title: 'Yapay Zeka Yol Haritası',
       description: 'Fikirleri iş etkisi, veri hazırlığı, maliyet ve risk açısından önceliklendirir.'
     },
     {
@@ -53,8 +53,8 @@ export const siteData = {
     },
     {
       number: '03',
-      title: 'Kurumsal AI Workshop',
-      description: 'Ekibin günlük işleri üzerinden uygulanabilir AI çalışma biçimleri oluşturur.'
+      title: 'Kurumsal Yapay Zeka Workshop',
+      description: 'Ekibin günlük işleri üzerinden uygulanabilir Yapay Zeka çalışma biçimleri oluşturur.'
     }
   ],
   useCases: [
