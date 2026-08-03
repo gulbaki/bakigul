@@ -18,6 +18,12 @@ test('notebook navigation links to services, check-up, writing, and contact', ()
   assert.match(html, /href="#contact"[^>]*>İletişim/);
 });
 
+test('header uses the Baki ile AI brand logo', () => {
+  assert.match(html, /src="\.\/assets\/baki-ile-ai-logo\.png"/);
+  assert.match(html, /alt="Baki ile AI"/);
+  assert.doesNotMatch(html, /class="brand-monogram"/);
+});
+
 test('hero contains a working note with four consulting principles', () => {
   assert.match(html, /class="working-note"/);
   assert.equal((html.match(/class="principle-item"/g) ?? []).length, 4);
