@@ -729,6 +729,38 @@ h1 em::after {
   font-size: 14px;
 }
 
+.recommendation-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+  padding: 13px 18px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper-light);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.recommendation-cta:hover {
+  background: var(--clay);
+  transform: translateY(-2px);
+}
+
+.recommendation-cta:focus-visible {
+  outline: 3px solid rgba(217, 119, 87, 0.3);
+  outline-offset: 3px;
+}
+
+#contact {
+  scroll-margin-top: 90px;
+}
+
 .checkup-contact {
   display: grid;
   grid-template-columns: minmax(250px, 0.66fr) minmax(0, 1.34fr);

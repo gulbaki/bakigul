@@ -1,6 +1,15 @@
 <!doctype html>
 <html lang="tr">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7ERQF3DF3M"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-7ERQF3DF3M');
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
@@ -9,6 +18,7 @@
     />
     <meta name="theme-color" content="#f7f1e7" />
     <title>Baki Gül — AI Danışmanlığı</title>
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="./assets/styles.css" />
     <script type="module" src="./assets/app.js"></script>
   </head>
@@ -27,7 +37,7 @@
           />
         </a>
 
-        <p class="header-note">AI danışmanlığı · İstanbul</p>
+        <p class="header-note">Yapay Zeka danışmanlığı</p>
 
         <nav class="main-nav" aria-label="Sayfa bölümleri">
           <a href="#services">Çalışma alanları</a>
@@ -43,9 +53,9 @@
         <section class="notebook-spread hero-section" aria-labelledby="hero-title">
           <div class="notebook-page hero-page">
             <div class="page-label"><span>01</span> Danışmanlık notları</div>
-            <p class="eyebrow">Teknoloji değil, doğru problem.</p>
+            <p class="eyebrow" data-bind="eyebrow">Teknoloji değil, doğru problem.</p>
             <h1 id="hero-title" data-bind-html="hero-title">
-              Şirketinizde yapay zekânın gerçekten
+              Şirketinizde yapay zekanın gerçekten
               <em>nerede işe yarayacağını</em> buluyorum.
             </h1>
             <p class="hero-description" data-bind="hero-description">
@@ -74,7 +84,7 @@
             <span class="tape tape-top" aria-hidden="true"></span>
             <div class="working-note">
               <p class="handwritten-title">working note / 04</p>
-              <h2>Bir AI projesine nasıl başlıyorum?</h2>
+              <h2>Bir Yapay zeka projesine nasıl başlıyorum?</h2>
               <ol class="principle-list">
                 <li class="principle-item"><span>1</span><strong>Önce problem.</strong><small>Model seçmeden önce iş akışını anlamak.</small></li>
                 <li class="principle-item"><span>2</span><strong>Sonra veri.</strong><small>Kalite, erişim ve yetki sınırlarını görmek.</small></li>
@@ -90,7 +100,7 @@
           <header class="section-intro">
             <div>
               <p class="section-kicker">Mini çalışma sayfası · 02</p>
-              <h2 id="checkup-title">Şirketinizin AI derdi ne?</h2>
+              <h2 id="checkup-title">Şirketinizin Yapay Zeka ile derdi ne?</h2>
             </div>
             <p>Bir seçeneğe dokunun; ilk danışmanlık yönünü hemen görün.</p>
           </header>
@@ -126,76 +136,10 @@
                 <span>İlk adım</span>
                 <p>60 dakikalık bir keşif görüşmesiyle üç öncelikli kullanım alanı ve ilk deneme kapsamı çıkarılır.</p>
               </div>
+              <button class="recommendation-cta" type="button" data-checkup-contact-cta>
+                İletişime geç <span aria-hidden="true">↓</span>
+              </button>
             </article>
-          </div>
-
-          <div class="checkup-contact" aria-labelledby="checkup-contact-title">
-            <div class="checkup-contact-intro">
-              <p class="section-kicker">İletişime geç · seçimin hazır</p>
-              <h3 id="checkup-contact-title">Bu notu birlikte işe dönüştürelim.</h3>
-              <p>
-                Kısa formu bırakın; seçtiğiniz problem ve önerilen çalışma notuyla birlikte
-                doğrudan bana ulaşsın.
-              </p>
-              <div class="selected-problem-slip">
-                <span>Seçilen konu</span>
-                <strong data-selected-problem-label>Nereden başlayacağımızı bilmiyoruz.</strong>
-              </div>
-            </div>
-
-            <form
-              class="contact-form-card"
-              action="https://api.bakigul.com/contact"
-              method="post"
-              data-contact-form
-              data-endpoint="https://api.bakigul.com/contact"
-            >
-              <div class="form-grid">
-                <label class="form-field">
-                  <span>Ad soyad <small>gerekli</small></span>
-                  <input type="text" name="fullName" autocomplete="name" minlength="2" maxlength="100" required />
-                </label>
-
-                <label class="form-field">
-                  <span>İş e-postası <small>gerekli</small></span>
-                  <input type="email" name="email" autocomplete="email" maxlength="254" required />
-                </label>
-
-                <label class="form-field form-field--wide">
-                  <span>Şirket <small>isteğe bağlı</small></span>
-                  <input type="text" name="company" autocomplete="organization" maxlength="120" />
-                </label>
-
-                <label class="form-field form-field--wide">
-                  <span>Kısaca neyi çözmek istiyorsunuz? <small>gerekli</small></span>
-                  <textarea name="message" minlength="20" maxlength="2000" rows="5" required></textarea>
-                </label>
-              </div>
-
-              <input
-                type="hidden"
-                name="problem"
-                value="Nereden başlayacağımızı bilmiyoruz. — AI Yol Haritası"
-                data-selected-problem-input
-              />
-              <input type="hidden" name="source" value="AI check-up" />
-
-              <div class="form-honeypot" aria-hidden="true" inert>
-                <label>
-                  Web sitesi
-                  <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
-                </label>
-              </div>
-
-              <div class="form-submit-row">
-                <p>Bilgileriniz yalnızca bu talebe yanıt vermek amacıyla kullanılır.</p>
-                <button class="contact-form-submit" type="submit" data-contact-submit>
-                  <span data-submit-label>Notu gönder</span>
-                  <span aria-hidden="true">↗</span>
-                </button>
-              </div>
-              <p class="form-status" role="status" aria-live="polite" data-form-status></p>
-            </form>
           </div>
 
           <noscript>
@@ -302,18 +246,75 @@
           </div>
         </section>
 
-        <section id="contact" class="tear-off-contact" aria-labelledby="contact-title">
+        <section id="contact" class="tear-off-contact" aria-labelledby="checkup-contact-title">
           <div class="perforation" aria-hidden="true"></div>
-          <p class="section-kicker">Sonraki sayfa · 07</p>
-          <div class="contact-grid">
-            <div>
-              <h2 id="contact-title" data-bind="contact-title">Bir chatbot daha yapmadan önce doğru problemi seçelim.</h2>
-              <p class="handwritten-arrow">buradan başlayalım ↘</p>
+          <div class="checkup-contact" aria-labelledby="checkup-contact-title">
+            <div class="checkup-contact-intro">
+              <p class="section-kicker">İletişime geç · seçimin hazır</p>
+              <h3 id="checkup-contact-title">Bu notu birlikte işe dönüştürelim.</h3>
+              <p>
+                Kısa formu bırakın; seçtiğiniz problem ve önerilen çalışma notuyla birlikte
+                doğrudan bana ulaşsın.
+              </p>
+              <div class="selected-problem-slip">
+                <span>Seçilen konu</span>
+                <strong data-selected-problem-label>Nereden başlayacağımızı bilmiyoruz.</strong>
+              </div>
             </div>
-            <div class="contact-actions">
-              <p data-bind="contact-description">Mevcut durumunuzu ve en mantıklı ilk adımı kısa bir görüşmede konuşalım.</p>
-              <a class="contact-button" href="https://www.linkedin.com/in/baki-gul/" data-link="contact" target="_blank" rel="noreferrer">LinkedIn'den ulaşın <span aria-hidden="true">↗</span></a>
-            </div>
+
+            <form
+              class="contact-form-card"
+              action="https://api.bakigul.com/contact"
+              method="post"
+              data-contact-form
+              data-endpoint="https://api.bakigul.com/contact"
+            >
+              <div class="form-grid">
+                <label class="form-field">
+                  <span>Ad soyad <small>gerekli</small></span>
+                  <input type="text" name="fullName" autocomplete="name" minlength="2" maxlength="100" required />
+                </label>
+
+                <label class="form-field">
+                  <span>E-posta <small>gerekli</small></span>
+                  <input type="email" name="email" autocomplete="email" maxlength="254" required />
+                </label>
+
+                <label class="form-field form-field--wide">
+                  <span>Şirket <small>isteğe bağlı</small></span>
+                  <input type="text" name="company" autocomplete="organization" maxlength="120" />
+                </label>
+
+                <label class="form-field form-field--wide">
+                  <span>Kısaca neyi çözmek istiyorsunuz? <small>gerekli</small></span>
+                  <textarea name="message" minlength="20" maxlength="2000" rows="5" required></textarea>
+                </label>
+              </div>
+
+              <input
+                type="hidden"
+                name="problem"
+                value="Nereden başlayacağımızı bilmiyoruz. — Yapay Zeka Yol Haritası"
+                data-selected-problem-input
+              />
+              <input type="hidden" name="source" value="AI check-up" />
+
+              <div class="form-honeypot" aria-hidden="true" inert>
+                <label>
+                  Web sitesi
+                  <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+                </label>
+              </div>
+
+              <div class="form-submit-row">
+                <p>Bilgileriniz yalnızca bu talebe yanıt vermek amacıyla kullanılır.</p>
+                <button class="contact-form-submit" type="submit" data-contact-submit>
+                  <span data-submit-label>Notu gönder</span>
+                  <span aria-hidden="true">↗</span>
+                </button>
+              </div>
+              <p class="form-status" role="status" aria-live="polite" data-form-status></p>
+            </form>
           </div>
           <footer class="site-footer">
             <span>© 2026 Baki Gül</span>
