@@ -22,6 +22,10 @@ test('site links use https URLs', () => {
   }
 });
 
+test('contact form points to the production Cloudflare Worker', () => {
+  assert.equal(siteData.contact.endpoint, 'https://api.bakigul.com/contact');
+});
+
 
 test('defines four notebook blog posts with one featured article', () => {
   assert.equal(siteData.blog.posts.length, 4);

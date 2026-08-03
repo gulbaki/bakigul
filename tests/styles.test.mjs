@@ -27,6 +27,14 @@ test('styles worksheet selected and accessible focus states', () => {
   assert.match(css, /:focus-visible/);
 });
 
+test('styles the check-up contact form and submission states', () => {
+  assert.match(css, /\.checkup-contact\s*\{/);
+  assert.match(css, /\.contact-form-card\s*\{/);
+  assert.match(css, /\.contact-form-submit\s*\{/);
+  assert.match(css, /\.form-status\[data-state="success"\]/);
+  assert.match(css, /\.form-status\[data-state="error"\]/);
+});
+
 test('defines featured blog grid and tear-off contact page', () => {
   assert.match(css, /\.blog-grid\s*\{/);
   assert.match(css, /\.article-card--featured\s*\{[^}]*grid-row:\s*1\s*\/\s*span\s*3/s);

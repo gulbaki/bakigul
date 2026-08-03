@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "test": "node --test",
-    "serve": "python3 -m http.server 4173"
+    "serve": "python3 -m http.server 4173",
+    "worker:dev": "npx wrangler@latest dev --config worker/wrangler.jsonc --port 8787 --ip 127.0.0.1",
+    "worker:deploy": "npx wrangler@latest deploy --config worker/wrangler.jsonc"
   }
 }

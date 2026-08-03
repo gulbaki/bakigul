@@ -1,0 +1,37 @@
+{
+  "name": "baki-contact-api",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-03",
+  "workers_dev": true,
+  "routes": [
+    {
+      "pattern": "api.bakigul.com",
+      "custom_domain": true
+    }
+  ],
+  "vars": {
+    "CONTACT_TO": "info@bakigul.com",
+    "CONTACT_FROM": "website@bakigul.com",
+    "ALLOWED_ORIGINS": "https://bakigul.com,https://www.bakigul.com,https://gulbaki.github.io,http://localhost:4173,http://127.0.0.1:4173"
+  },
+  "send_email": [
+    {
+      "name": "EMAIL",
+      "allowed_destination_addresses": ["info@bakigul.com"],
+      "allowed_sender_addresses": ["website@bakigul.com"]
+    }
+  ],
+  "ratelimits": [
+    {
+      "name": "CONTACT_RATE_LIMITER",
+      "namespace_id": "20260803",
+      "simple": {
+        "limit": 30,
+        "period": 60
+      }
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}

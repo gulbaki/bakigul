@@ -129,6 +129,75 @@
             </article>
           </div>
 
+          <div class="checkup-contact" aria-labelledby="checkup-contact-title">
+            <div class="checkup-contact-intro">
+              <p class="section-kicker">İletişime geç · seçimin hazır</p>
+              <h3 id="checkup-contact-title">Bu notu birlikte işe dönüştürelim.</h3>
+              <p>
+                Kısa formu bırakın; seçtiğiniz problem ve önerilen çalışma notuyla birlikte
+                doğrudan bana ulaşsın.
+              </p>
+              <div class="selected-problem-slip">
+                <span>Seçilen konu</span>
+                <strong data-selected-problem-label>Nereden başlayacağımızı bilmiyoruz.</strong>
+              </div>
+            </div>
+
+            <form
+              class="contact-form-card"
+              action="https://api.bakigul.com/contact"
+              method="post"
+              data-contact-form
+              data-endpoint="https://api.bakigul.com/contact"
+            >
+              <div class="form-grid">
+                <label class="form-field">
+                  <span>Ad soyad <small>gerekli</small></span>
+                  <input type="text" name="fullName" autocomplete="name" minlength="2" maxlength="100" required />
+                </label>
+
+                <label class="form-field">
+                  <span>İş e-postası <small>gerekli</small></span>
+                  <input type="email" name="email" autocomplete="email" maxlength="254" required />
+                </label>
+
+                <label class="form-field form-field--wide">
+                  <span>Şirket <small>isteğe bağlı</small></span>
+                  <input type="text" name="company" autocomplete="organization" maxlength="120" />
+                </label>
+
+                <label class="form-field form-field--wide">
+                  <span>Kısaca neyi çözmek istiyorsunuz? <small>gerekli</small></span>
+                  <textarea name="message" minlength="20" maxlength="2000" rows="5" required></textarea>
+                </label>
+              </div>
+
+              <input
+                type="hidden"
+                name="problem"
+                value="Nereden başlayacağımızı bilmiyoruz. — AI Yol Haritası"
+                data-selected-problem-input
+              />
+              <input type="hidden" name="source" value="AI check-up" />
+
+              <div class="form-honeypot" aria-hidden="true" inert>
+                <label>
+                  Web sitesi
+                  <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+                </label>
+              </div>
+
+              <div class="form-submit-row">
+                <p>Bilgileriniz yalnızca bu talebe yanıt vermek amacıyla kullanılır.</p>
+                <button class="contact-form-submit" type="submit" data-contact-submit>
+                  <span data-submit-label>Notu gönder</span>
+                  <span aria-hidden="true">↗</span>
+                </button>
+              </div>
+              <p class="form-status" role="status" aria-live="polite" data-form-status></p>
+            </form>
+          </div>
+
           <noscript>
             <div class="noscript-fallback">
               <p><strong>AI Yol Haritası:</strong> Süreç ve veri hazırlığı analiziyle öncelikli kullanım alanları belirlenir.</p>

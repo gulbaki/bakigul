@@ -111,6 +111,27 @@ Build komutuna gerek yoktur. Yayın kökü `index.html` dosyasının bulunduğu 
 npm test
 ```
 
+## İletişim formu ve Cloudflare Worker
+
+AI check-up bölümündeki form, geliştirme ortamında `http://localhost:8787/contact`,
+üretimde `https://api.bakigul.com/contact` adresine gönderilir.
+
+Yerel Worker'ı başlatmak için ayrı bir terminalde:
+
+```bash
+npm run worker:dev
+```
+
+Worker şunları uygular:
+
+- Yalnız izin verilen site origin'lerinden form kabulü
+- Alan doğrulama ve 16 KB istek sınırı
+- Honeypot spam koruması
+- Cloudflare rate-limit bağlaması
+- Cloudflare Email Service ile `info@bakigul.com` adresine teslimat
+
+Cloudflare alan adı ve yayınlama adımları `worker/README.md` dosyasındadır.
+
 ## GitHub fork'una gönderme
 
 Bu klasörü açtıktan sonra terminalde şu komutu çalıştırın:

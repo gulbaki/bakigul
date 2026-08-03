@@ -114,7 +114,8 @@ export const siteData = {
   },
   contact: {
     title: 'Bir chatbot daha yapmadan önce doğru problemi seçelim.',
-    description: 'Mevcut durumunuzu ve en mantıklı ilk adımı kısa bir görüşmede konuşalım.'
+    description: 'Mevcut durumunuzu ve en mantıklı ilk adımı kısa bir görüşmede konuşalım.',
+    endpoint: 'https://api.bakigul.com/contact'
   },
   links: {
     contact: 'https://www.linkedin.com/in/baki-gul/',

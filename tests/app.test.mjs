@@ -8,7 +8,10 @@ import {
   serviceListMarkup,
   numberedListMarkup,
   heroTitleMarkup,
-  blogCardsMarkup
+  blogCardsMarkup,
+  problemContactValue,
+  resolveContactEndpoint,
+  contactPayloadFromEntries
 } from '../assets/app.js';
 
 test('findPreset falls back to the first preset', () => {
@@ -24,6 +27,30 @@ test('recommendationMarkup includes all recommendation fields', () => {
 
 test('selectionState marks only one button pressed', () => {
   assert.deepEqual(selectionState(['a', 'b', 'c'], 'b'), [false, true, false]);
+});
+
+test('problemContactValue carries the selected problem into the form', () => {
+  assert.equal(
+    problemContactValue(findPreset('ekip')),
+    'Ekibimiz AI araçlarından yeterince verim alamıyor. — Kurumsal AI Workshop'
+  );
+});
+
+test('resolveContactEndpoint uses the local Worker during development', () => {
+  assert.equal(resolveContactEndpoint('https://api.bakigul.com/contact', 'localhost'), 'http://localhost:8787/contact');
+  assert.equal(resolveContactEndpoint('https://api.bakigul.com/contact', 'bakigul.com'), 'https://api.bakigul.com/contact');
+  assert.throws(() => resolveContactEndpoint('http://api.example.com/contact', 'bakigul.com'), /HTTPS/);
+});
+
+test('contactPayloadFromEntries keeps only expected form fields', () => {
+  const payload = contactPayloadFromEntries([
+    ['fullName', 'Baki Gül'],
+    ['email', 'baki@example.com'],
+    ['unknown', 'ignored']
+  ]);
+  assert.equal(payload.fullName, 'Baki Gül');
+  assert.equal(payload.email, 'baki@example.com');
+  assert.equal('unknown' in payload, false);
 });
 
 

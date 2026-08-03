@@ -38,6 +38,17 @@ test('page exposes three accessible problem choices and a recommendation note', 
   assert.match(html, /class="consultant-note"/);
 });
 
+test('AI check-up includes an accessible contact form wired to the Worker', () => {
+  assert.match(html, /data-contact-form/);
+  assert.match(html, /action="https:\/\/api\.bakigul\.com\/contact"/);
+  assert.match(html, /name="fullName"[^>]*required/);
+  assert.match(html, /name="email"[^>]*required/);
+  assert.match(html, /name="message"[^>]*required/);
+  assert.match(html, /data-selected-problem-input/);
+  assert.match(html, /name="website"[^>]*tabindex="-1"/);
+  assert.match(html, /role="status"[^>]*aria-live="polite"/);
+});
+
 test('page contains a notebook blog section with fallback article content', () => {
   assert.match(html, /data-bind-list="blog-posts"/);
   assert.match(html, /article-card--featured/);
