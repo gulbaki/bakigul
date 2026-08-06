@@ -55,8 +55,8 @@
             <div class="page-label"><span>01</span> Danışmanlık notları</div>
             <p class="eyebrow" data-bind="eyebrow">Teknoloji değil, doğru problem.</p>
             <h1 id="hero-title" data-bind-html="hero-title">
-              Şirketinizde yapay zekanın gerçekten
-              <em>nerede işe yarayacağını</em> buluyorum.
+              Yapay zeka fikirlerini
+              <em>çalışan iş akışlarına</em> dönüştürüyorum.
             </h1>
             <p class="hero-description" data-bind="hero-description">
               AI stratejisi, RAG, agent sistemleri ve ekip eğitimleri. Önce doğru problemi seçer,
@@ -184,8 +184,10 @@
             <ul class="use-case-list" data-bind-list="use-cases">
               <li><span>01</span> Kurumsal doküman asistanı</li>
               <li><span>02</span> Müşteri e-postası agent'ı</li>
-              <li><span>03</span> Hasar ve operasyon dosyası copilot'u</li>
+              <li><span>03</span> Hasar ve operasyon dosyası asistanı</li>
               <li><span>04</span> Teklif ve rapor otomasyonu</li>
+              <li><span>05</span> Sözleşme ve doküman inceleme asistanı</li>
+              <li><span>06</span> Satış görüşmesi özeti ve CRM güncelleme akışı</li>
             </ul>
             <span class="circle-note" aria-hidden="true">use case ≠ demo</span>
           </section>
@@ -197,6 +199,13 @@
             <p data-bind="credibility-description">
               Yazılım mühendisliği, LLM uygulamaları ve AI çözüm mimarisi geçmişini; şirketlerin gerçek süreçlerine uygulanabilir çözümlere dönüştürüyorum.
             </p>
+            <div class="about-linkedin">
+              <p data-bind="credibility-linkedin-prompt">Benim hakkımda daha fazlasını merak ediyorsanız,</p>
+              <a href="https://www.linkedin.com/in/baki-gul/" data-link="linkedin" target="_blank" rel="noreferrer">
+                <span data-bind="credibility-linkedin-cta">LinkedIn profilime göz atın</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
             <ul class="signal-list" aria-label="Deneyim alanları" data-bind-list="credibility-signals">
               <li>Senior Software Engineer geçmişi</li>
               <li>Generative AI ve LLM uygulamaları</li>
@@ -306,9 +315,16 @@
                 </label>
               </div>
 
+              <div
+                class="turnstile-shell"
+                data-turnstile
+                aria-label="Bot koruması doğrulaması"
+                hidden
+              ></div>
+
               <div class="form-submit-row">
                 <p>Bilgileriniz yalnızca bu talebe yanıt vermek amacıyla kullanılır.</p>
-                <button class="contact-form-submit" type="submit" data-contact-submit>
+                <button class="contact-form-submit" type="submit" data-contact-submit disabled>
                   <span data-submit-label>Notu gönder</span>
                   <span aria-hidden="true">↗</span>
                 </button>

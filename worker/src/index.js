@@ -9,6 +9,9 @@ const DEFAULT_ALLOWED_ORIGINS = [
 const MAX_BODY_BYTES = 16 * 1024;
 const DEFAULT_TO = 'info@bakigul.com';
 const DEFAULT_FROM = 'website@bakigul.com';
+const TURNSTILE_ACTION = 'contact_form';
+const TURNSTILE_TEST_SECRET_KEY = '1x0000000000000000000000000000000AA';
+const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 
 function cleanSingleLine(value, maxLength) {
   return String(value ?? '')
@@ -56,7 +59,11 @@ export function validateContactPayload(payload) {
     message: cleanMessage(payload?.message, 2000),
     problem: cleanSingleLine(payload?.problem, 240),
     source: cleanSingleLine(payload?.source, 80),
-    website: cleanSingleLine(payload?.website, 200)
+    website: cleanSingleLine(payload?.website, 200),
+    turnstileToken: cleanSingleLine(
+      payload?.turnstileToken ?? payload?.['cf-turnstile-response'],
+      2048
+    )
   };
 
   const errors = {};
@@ -70,6 +77,41 @@ export function validateContactPayload(payload) {
     data,
     errors,
     isBot: data.website.length > 0
+  };
+}
+
+export async function verifyTurnstileToken(token, request, env = {}) {
+  const secret = cleanSingleLine(env.TURNSTILE_SECRET_KEY, 2048);
+  if (!secret) throw new Error('Turnstile secret is not configured.');
+  if (!token) return { success: false, reason: 'missing-token' };
+
+  const verificationBody = new FormData();
+  verificationBody.set('secret', secret);
+  verificationBody.set('response', token);
+
+  const remoteIp = request.headers.get('CF-Connecting-IP');
+  if (remoteIp) verificationBody.set('remoteip', remoteIp);
+
+  const verifyFetch = env.TURNSTILE_FETCH || fetch;
+  const response = await verifyFetch(TURNSTILE_VERIFY_URL, {
+    method: 'POST',
+    body: verificationBody
+  });
+
+  if (!response.ok) throw new Error(`Turnstile Siteverify returned ${response.status}.`);
+
+  const outcome = await response.json();
+  const expectedHostname = new URL(request.headers.get('Origin')).hostname;
+  const isLocalTest = secret === TURNSTILE_TEST_SECRET_KEY
+    && (expectedHostname === 'localhost' || expectedHostname === '127.0.0.1');
+  const success = outcome?.success === true && (
+    isLocalTest
+    || (outcome.hostname === expectedHostname && outcome.action === TURNSTILE_ACTION)
+  );
+
+  return {
+    success,
+    reason: success ? null : 'verification-failed'
   };
 }
 
@@ -228,6 +270,26 @@ export async function handleRequest(request, env = {}) {
     return jsonResponse(
       { ok: false, message: 'Form alanlarını kontrol edin.', errors: validation.errors },
       422,
+      origin
+    );
+  }
+
+  try {
+    const turnstile = await verifyTurnstileToken(validation.data.turnstileToken, request, env);
+    if (!turnstile.success) {
+      return jsonResponse(
+        { ok: false, message: 'Güvenlik doğrulaması başarısız oldu. Lütfen tekrar deneyin.' },
+        403,
+        origin
+      );
+    }
+  } catch (error) {
+    console.error('Turnstile verification failed', {
+      message: error instanceof Error ? error.message : 'Unknown error'
+    });
+    return jsonResponse(
+      { ok: false, message: 'Güvenlik doğrulaması şu anda kullanılamıyor. Lütfen biraz sonra tekrar deneyin.' },
+      503,
       origin
     );
   }
