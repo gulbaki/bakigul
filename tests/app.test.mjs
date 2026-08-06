@@ -11,6 +11,7 @@ import {
   blogCardsMarkup,
   problemContactValue,
   resolveContactEndpoint,
+  resolveTurnstileSiteKey,
   contactPayloadFromEntries
 } from '../assets/app.js';
 
@@ -42,14 +43,22 @@ test('resolveContactEndpoint uses the local Worker during development', () => {
   assert.throws(() => resolveContactEndpoint('http://api.example.com/contact', 'bakigul.com'), /HTTPS/);
 });
 
+test('resolveTurnstileSiteKey uses Cloudflare test credentials only on localhost', () => {
+  assert.equal(resolveTurnstileSiteKey('production-key', 'localhost'), '1x00000000000000000000AA');
+  assert.equal(resolveTurnstileSiteKey('production-key', 'bakigul.com'), 'production-key');
+  assert.equal(resolveTurnstileSiteKey('', 'bakigul.com'), '');
+});
+
 test('contactPayloadFromEntries keeps only expected form fields', () => {
   const payload = contactPayloadFromEntries([
     ['fullName', 'Baki Gül'],
     ['email', 'baki@example.com'],
+    ['cf-turnstile-response', 'verified-token'],
     ['unknown', 'ignored']
   ]);
   assert.equal(payload.fullName, 'Baki Gül');
   assert.equal(payload.email, 'baki@example.com');
+  assert.equal(payload.turnstileToken, 'verified-token');
   assert.equal('unknown' in payload, false);
 });
 

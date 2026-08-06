@@ -1,5 +1,9 @@
 import { problemPresets, siteData } from './site-data.js';
 
+const TURNSTILE_TEST_SITE_KEY = '1x00000000000000000000AA';
+const TURNSTILE_SCRIPT_URL = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+let turnstileApiPromise;
+
 const escapeHtml = (value) =>
   String(value)
     .replaceAll('&', '&amp;')
@@ -52,6 +56,14 @@ export function resolveContactEndpoint(configuredEndpoint, hostname) {
   return endpoint.href;
 }
 
+export function resolveTurnstileSiteKey(configuredSiteKey, hostname) {
+  if (hostname === 'localhost' || hostname === '127.0.0.1') {
+    return TURNSTILE_TEST_SITE_KEY;
+  }
+
+  return String(configuredSiteKey ?? '').trim();
+}
+
 export function contactPayloadFromEntries(entries) {
   const values = Object.fromEntries(entries);
   return {
@@ -61,8 +73,39 @@ export function contactPayloadFromEntries(entries) {
     message: String(values.message ?? ''),
     problem: String(values.problem ?? ''),
     source: String(values.source ?? ''),
-    website: String(values.website ?? '')
+    website: String(values.website ?? ''),
+    turnstileToken: String(values['cf-turnstile-response'] ?? '')
   };
+}
+
+function loadTurnstileApi() {
+  if (window.turnstile) return Promise.resolve(window.turnstile);
+  if (turnstileApiPromise) return turnstileApiPromise;
+
+  turnstileApiPromise = new Promise((resolve, reject) => {
+    const existingScript = document.querySelector('[data-turnstile-api]');
+    const onLoad = () => window.turnstile
+      ? resolve(window.turnstile)
+      : reject(new Error('Turnstile yüklenemedi.'));
+    const onError = () => reject(new Error('Turnstile yüklenemedi.'));
+
+    if (existingScript) {
+      existingScript.addEventListener('load', onLoad, { once: true });
+      existingScript.addEventListener('error', onError, { once: true });
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = TURNSTILE_SCRIPT_URL;
+    script.async = true;
+    script.defer = true;
+    script.dataset.turnstileApi = '';
+    script.addEventListener('load', onLoad, { once: true });
+    script.addEventListener('error', onError, { once: true });
+    document.head.append(script);
+  });
+
+  return turnstileApiPromise;
 }
 
 export function heroTitleMarkup(hero) {
@@ -159,6 +202,8 @@ function hydrateSiteCopy() {
   setList('services', serviceListMarkup(siteData.services));
   setList('use-cases', numberedListMarkup(siteData.useCases));
   setList('credibility-signals', tagListMarkup(siteData.credibility.signals));
+  setText('credibility-linkedin-prompt', siteData.credibility.linkedinPrompt);
+  setText('credibility-linkedin-cta', siteData.credibility.linkedinCta);
   setList('blog-posts', blogCardsMarkup(siteData.blog.posts));
   setText('blog-title', siteData.blog.title);
   setText('blog-description', siteData.blog.description);
@@ -193,12 +238,82 @@ function initializeContactForm() {
   const submitButton = form.querySelector('[data-contact-submit]');
   const submitLabel = form.querySelector('[data-submit-label]');
   const status = form.querySelector('[data-form-status]');
+  const turnstileContainer = form.querySelector('[data-turnstile]');
+  const turnstileSiteKey = resolveTurnstileSiteKey(
+    siteData.contact.turnstileSiteKey,
+    window.location.hostname
+  );
+  let turnstileApi;
+  let turnstileWidgetId;
+  let turnstileToken = '';
+
+  const setCaptchaState = (token = '') => {
+    turnstileToken = token;
+    submitButton.disabled = turnstileToken.length === 0;
+  };
+
+  const resetCaptcha = () => {
+    setCaptchaState();
+    if (turnstileApi && turnstileWidgetId !== undefined) {
+      turnstileApi.reset(turnstileWidgetId);
+    }
+  };
+
+  setCaptchaState();
+
+  if (!turnstileSiteKey) {
+    status.textContent = window.location.protocol === 'file:'
+      ? 'Güvenlik doğrulaması için siteyi localhost üzerinden açın.'
+      : 'Güvenlik doğrulaması henüz yapılandırılmadı.';
+    status.dataset.state = 'error';
+  } else if (turnstileContainer) {
+    turnstileContainer.hidden = false;
+    loadTurnstileApi()
+      .then((api) => {
+        turnstileApi = api;
+        turnstileWidgetId = api.render(turnstileContainer, {
+          sitekey: turnstileSiteKey,
+          action: 'contact_form',
+          appearance: 'always',
+          language: 'tr',
+          retry: 'auto',
+          size: 'flexible',
+          theme: 'light',
+          callback: (token) => {
+            setCaptchaState(token);
+            if (status.dataset.captchaError === 'true') {
+              status.textContent = '';
+              delete status.dataset.captchaError;
+              delete status.dataset.state;
+            }
+          },
+          'expired-callback': () => setCaptchaState(),
+          'timeout-callback': () => setCaptchaState(),
+          'error-callback': (errorCode) => {
+            setCaptchaState();
+            status.textContent = `Güvenlik doğrulaması tamamlanamadı. Lütfen tekrar deneyin. (Kod: ${errorCode})`;
+            status.dataset.state = 'error';
+            status.dataset.captchaError = 'true';
+          }
+        });
+      })
+      .catch(() => {
+        status.textContent = 'Güvenlik doğrulaması yüklenemedi. Lütfen sayfayı yenileyin.';
+        status.dataset.state = 'error';
+      });
+  }
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     if (!form.checkValidity()) {
       form.reportValidity();
+      return;
+    }
+
+    if (!turnstileToken) {
+      status.textContent = 'Lütfen güvenlik doğrulamasının tamamlanmasını bekleyin.';
+      status.dataset.state = 'error';
       return;
     }
 
@@ -227,17 +342,19 @@ function initializeContactForm() {
       form.reset();
       const problemInput = form.querySelector('[data-selected-problem-input]');
       if (problemInput) problemInput.value = selectedProblem;
+      resetCaptcha();
       status.textContent = 'Notunuz ulaştı. En kısa sürede size dönüş yapacağım.';
       status.dataset.state = 'success';
     } catch (error) {
+      resetCaptcha();
       status.textContent = error instanceof Error
         ? error.message
         : 'Mesaj gönderilemedi. Lütfen biraz sonra tekrar deneyin.';
       status.dataset.state = 'error';
     } finally {
-      submitButton.disabled = false;
       submitButton.removeAttribute('aria-busy');
       submitLabel.textContent = 'Notu gönder';
+      submitButton.disabled = turnstileToken.length === 0;
     }
   });
 }

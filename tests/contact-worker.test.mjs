@@ -14,7 +14,8 @@ const validPayload = {
   message: 'Kurumsal ekibimiz için bir AI yol haritası hazırlamak istiyoruz.',
   problem: 'Nereden başlayacağımızı bilmiyoruz. — Yapay Zeka Yol Haritası',
   source: 'AI check-up',
-  website: ''
+  website: '',
+  turnstileToken: 'verified-token'
 };
 
 function postRequest(payload = validPayload, headers = {}) {
@@ -36,6 +37,14 @@ function createEnv(overrides = {}) {
     env: {
       CONTACT_TO: 'info@bakigul.com',
       CONTACT_FROM: 'website@bakigul.com',
+      TURNSTILE_SECRET_KEY: 'test-secret',
+      async TURNSTILE_FETCH() {
+        return Response.json({
+          success: true,
+          hostname: 'bakigul.com',
+          action: 'contact_form'
+        });
+      },
       EMAIL: {
         async send(message) {
           sent.push(message);
@@ -132,6 +141,62 @@ test('silently accepts honeypot submissions without sending email', async () => 
   const response = await handleRequest(postRequest({ ...validPayload, website: 'spam.example' }), env);
 
   assert.equal(response.status, 202);
+  assert.equal(sent.length, 0);
+});
+
+test('rejects submissions without a Turnstile token', async () => {
+  const { env, sent } = createEnv();
+  const response = await handleRequest(postRequest({ ...validPayload, turnstileToken: '' }), env);
+
+  assert.equal(response.status, 403);
+  assert.equal(sent.length, 0);
+});
+
+test('rejects tokens that fail Turnstile verification', async () => {
+  const { env, sent } = createEnv({
+    async TURNSTILE_FETCH() {
+      return Response.json({ success: false, hostname: 'bakigul.com', action: 'contact_form' });
+    }
+  });
+  const response = await handleRequest(postRequest(), env);
+
+  assert.equal(response.status, 403);
+  assert.equal(sent.length, 0);
+});
+
+test('accepts Cloudflare dummy validation responses only with the official local test secret', async () => {
+  const { env, sent } = createEnv({
+    TURNSTILE_SECRET_KEY: '1x0000000000000000000000000000000AA',
+    async TURNSTILE_FETCH() {
+      return Response.json({ success: true, hostname: 'localhost', action: 'test' });
+    }
+  });
+  const response = await handleRequest(
+    postRequest(validPayload, { Origin: 'http://localhost:4173' }),
+    env
+  );
+
+  assert.equal(response.status, 202);
+  assert.equal(sent.length, 1);
+});
+
+test('keeps hostname and action checks strict for production credentials', async () => {
+  const { env, sent } = createEnv({
+    async TURNSTILE_FETCH() {
+      return Response.json({ success: true, hostname: 'attacker.example', action: 'test' });
+    }
+  });
+  const response = await handleRequest(postRequest(), env);
+
+  assert.equal(response.status, 403);
+  assert.equal(sent.length, 0);
+});
+
+test('fails closed when the Turnstile secret is missing', async () => {
+  const { env, sent } = createEnv({ TURNSTILE_SECRET_KEY: '' });
+  const response = await handleRequest(postRequest(), env);
+
+  assert.equal(response.status, 503);
   assert.equal(sent.length, 0);
 });
 

@@ -32,9 +32,9 @@ export const siteData = {
   brand: 'Baki Gül',
   eyebrow: 'Yapay Zeka danışmanlığı',
   hero: {
-    titleLead: 'Şirketinizde yapay zekanın gerçekten',
-    titleEmphasis: 'nerede işe yarayacağını',
-    titleTail: 'buluyorum.',
+    titleLead: 'Yapay zeka fikirlerini',
+    titleEmphasis: 'çalışan iş akışlarına',
+    titleTail: 'dönüştürüyorum.',
     description:
       'Yapay zeka stratejisi, RAG, agent sistemleri ve ekip eğitimleri. Önce doğru problemi seçer, sonra çalışan bir ilk adım çıkarırız.',
     cta: 'Probleminizi konuşalım',
@@ -60,13 +60,17 @@ export const siteData = {
   useCases: [
     'Kurumsal doküman asistanı',
     "Müşteri e-postası agent'ı",
-    "Hasar ve operasyon dosyası copilot'u",
-    'Teklif ve rapor otomasyonu'
+    'Hasar ve operasyon dosyası asistanı',
+    'Teklif ve rapor otomasyonu',
+    'Sözleşme ve doküman inceleme asistanı',
+    'Satış görüşmesi özeti ve CRM güncelleme akışı'
   ],
   credibility: {
     title: 'Teknik tarafı bilen, işi de anlayan bir danışmanlık.',
     description:
       'Yazılım mühendisliği, LLM uygulamaları ve AI çözüm mimarisi geçmişini; şirketlerin gerçek süreçlerine uygulanabilir çözümlere dönüştürüyorum.',
+    linkedinPrompt: 'Benim hakkımda daha fazlasını merak ediyorsanız,',
+    linkedinCta: 'LinkedIn profilime göz atın',
     signals: [
       'Senior Software Engineer geçmişi',
       'Generative AI ve LLM uygulamaları',
@@ -115,7 +119,8 @@ export const siteData = {
   contact: {
     title: 'Bir chatbot daha yapmadan önce doğru problemi seçelim.',
     description: 'Mevcut durumunuzu ve en mantıklı ilk adımı kısa bir görüşmede konuşalım.',
-    endpoint: 'https://api.bakigul.com/contact'
+    endpoint: 'https://api.bakigul.com/contact',
+    turnstileSiteKey: '0x4AAAAAAEIMknha1Q_PGydh'
   },
   links: {
     contact: 'https://www.linkedin.com/in/baki-gul/',

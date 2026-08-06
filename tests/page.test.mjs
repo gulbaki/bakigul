@@ -46,6 +46,8 @@ test('AI check-up includes an accessible contact form wired to the Worker', () =
   assert.match(html, /name="message"[^>]*required/);
   assert.match(html, /data-selected-problem-input/);
   assert.match(html, /name="website"[^>]*tabindex="-1"/);
+  assert.match(html, /data-turnstile/);
+  assert.match(html, /data-contact-submit disabled/);
   assert.match(html, /role="status"[^>]*aria-live="polite"/);
 });
 
