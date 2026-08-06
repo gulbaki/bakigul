@@ -1,8 +1,6 @@
 name: Deploy static site to GitHub Pages
 
 on:
-  push:
-    branches: ["template"]
   workflow_dispatch:
 
 permissions:
